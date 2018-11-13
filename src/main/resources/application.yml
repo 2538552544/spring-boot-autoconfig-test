@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    druid:
+      driver: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/spring-boot?serverTimezone=GMT%2B8&amp;useSSL=false
+      username: root
+      password: web2017
+  thymeleaf: #取消模版引擎缓存技术
+    cache: false
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
