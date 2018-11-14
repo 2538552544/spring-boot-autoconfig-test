@@ -1,6 +1,12 @@
 package com.creatorblue.springbootautoconfig.controller;
 
+import org.apache.commons.io.FileUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
@@ -36,5 +42,17 @@ public class DownloadController {
             }
         }
         return null;
+    }
+
+    @GetMapping("downloadNew")
+    public ResponseEntity<byte[]> downLoadNews() throws IOException {
+        String path = "D:/IOTest";
+        String fileName = "test.png";
+        File file = new File(path + "/" + fileName);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        httpHeaders.setContentDispositionFormData("attachment", fileName);
+        System.out.println("访问方法");
+        return new ResponseEntity<>(FileUtils.readFileToByteArray(file), httpHeaders, HttpStatus.OK);
     }
 }
